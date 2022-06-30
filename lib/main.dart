@@ -1,75 +1,83 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'shirt.dart';
+import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 
 void main() {
-  runApp(const MaterialApp(
-    title: 'Shopping App',
-    home: ShoppingList(
-      products: [
-        Product(name: 'Eggs'),
-        Product(name: 'Flour'),
-        Product(name: 'Chocolate chips'),
-        Product(name: 'Apple'),
-      ],
-    ),
-  ));
+  runApp(MyApp());
 }
 
-class Product {
-  const Product({required this.name});
-
-  final String name;
-}
-
-class ShoppingListItem extends StatelessWidget {
-  ShoppingListItem({
-    required this.product,
-    required this.inCart,
-  }) : super(key: ObjectKey(product));
-
-  final Product product;
-  final bool inCart;
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: () {},
-      leading: CircleAvatar(
-        child: Text(product.name[0]),
-      ),
-      title: Text(
-        product.name,
-      ),
+    return MaterialApp(
+      title: "My App",
+      home: homepage(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.orange),
     );
   }
 }
 
-class ShoppingList extends StatefulWidget {
-  const ShoppingList({required this.products, super.key});
-
-  final List<Product> products;
-
+class homepage extends StatefulWidget {
   @override
-  _ShoppingListState createState() => _ShoppingListState();
+  State<homepage> createState() => _homepageState();
 }
 
-class _ShoppingListState extends State<ShoppingList> {
-  final _shoppingCart = <Product>{};
+class _homepageState extends State<homepage> {
+  static List<String> shirtname = [
+    'GOLDIE',
+    'HANES',
+    'MADEWELL',
+    'XKARLA',
+    'MILO',
+  ];
+  static List<String> shirtprice = [' 800฿', ' 600฿', ' 250฿', '530฿', '520฿'];
+
+  final List<Shirt> Shirtdata = List.generate(shirtname.length,
+      (index) => Shirt('${shirtname[index]}', '${shirtprice[index]}'));
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Shopping Closet'),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        children: widget.products.map((product) {
-          return ShoppingListItem(
-            product: product,
-            inCart: _shoppingCart.contains(product),
-          );
-        }).toList(),
-      ),
-    );
+    return DefaultTabController(
+        length: 3,
+        child: Scaffold(
+            appBar: AppBar(
+              bottom: TabBar(
+                tabs: [
+                  Tab(
+                    text: 'Shirt',
+                  ),
+                  Tab(
+                    text: 'Trousers',
+                  ),
+                  Tab(
+                    text: 'Shoe',
+                  ),
+                ],
+              ),
+              title: Text('Shopping Closet'),
+            ),
+            body: ListView.builder(
+              itemCount: Shirtdata.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(Shirtdata[index].name),
+                  subtitle: Text(Shirtdata[index].price),
+                  // trailing: IconButton(
+                  //     onPressed: () {}, icon: Icon(Icons.shopping_cart)),
+                  leading: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      child: ProfilePicture(
+                        name: Shirtdata[index].name,
+                        radius: 31,
+                        fontsize: 21,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            )));
   }
 }
