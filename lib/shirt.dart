@@ -2,18 +2,63 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 
-class Shirt {
+class Shirt1 {
   final String name, price;
 
-  Shirt(this.name, this.price);
+  Shirt1(this.name, this.price);
 }
 
-var basket = IconButton(
-  icon: Icon(IconData(5870, fontFamily: 'MaterialIcons')),
-  color: Colors.black,
-  onPressed: () {},
-);
+class Shirt extends StatefulWidget {
+  @override
+  State<Shirt> createState() => _ShirtState();
+}
+
+class _ShirtState extends State<Shirt> {
+  static List<String> shirtname = [
+    'GOLDIE',
+    'HANES',
+    'MADEWELL',
+    'XKARLA',
+    'MILO',
+  ];
+  static List<String> shirtprice = [' 800฿', ' 600฿', ' 250฿', '530฿', '520฿'];
+
+  final List<Shirt1> Shirtdata = List.generate(shirtname.length,
+      (index) => Shirt1('${shirtname[index]}', '${shirtprice[index]}'));
+  @override
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: Shirtdata.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(Shirtdata[index].name),
+          subtitle: Text(Shirtdata[index].price),
+          // trailing: IconButton(
+          //     onPressed: () {}, icon: Icon(Icons.shopping_cart)),
+          leading: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              child: ProfilePicture(
+                name: Shirtdata[index].name,
+                radius: 31,
+                fontsize: 21,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+// var basket = IconButton(
+//   icon: Icon(IconData(5870, fontFamily: 'MaterialIcons')),
+//   color: Colors.black,
+//   onPressed: () {},
+// );
 
 
 
