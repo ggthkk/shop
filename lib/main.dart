@@ -1,8 +1,9 @@
 import 'package:closet/product.dart';
+import 'package:closet/receipt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
-//import 'product.dart';
-import 'shirt.dart';
+import 'product.dart';
+//import 'Detail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'List Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
       debugShowCheckedModeBanner: false,
@@ -33,17 +34,37 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  static List<String> shirtname = [
-    'GOLDIE',
-    'HANES',
-    'MADEWELL',
-    'XKARLA',
-    'MILO',
+  static List shirtList = [
+    new ShirtData('GOLDIE', 800.00),
+    new ShirtData('HANES', 600.00),
+    new ShirtData('MADEWELL', 250.00),
+    new ShirtData('XKARLA', 520.00),
+    new ShirtData('MILO', 530.00),
   ];
-  static List<String> shirtprice = [' 800฿', ' 600฿', ' 250฿', '530฿', '520฿'];
+  static List trouserList = [
+    new TrouserData('Blackberrys', 954.00),
+    new TrouserData('Parx', 899.00),
+    new TrouserData('Levi_s', 1552.00),
+    new TrouserData('Arrow', 2498.00),
+    new TrouserData('Reebok', 849.00),
+  ];
+  static List shoeList = [
+    new ShoeData('Nike', 1500.00),
+    new ShoeData('Adidas', 2000.00),
+    new ShoeData('Fila', 2200.00),
+    new ShoeData('Bata', 750.00),
+    new ShoeData('Puma', 900.00),
+  ];
 
-  final List<Shirt1> Shirtdata = List.generate(shirtname.length,
-      (index) => Shirt1('${shirtname[index]}', '${shirtprice[index]}'));
+  // static List<String> shirtname = [
+  //   'GOLDIE',
+  //   'HANES',
+  //   'MADEWELL',
+  //   'XKARLA',
+  //   'MILO'
+  // ];
+  // static List shirtprice = [' 800฿', ' 600฿', ' 250฿', '530฿', '520฿'];
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -55,8 +76,12 @@ class _MyHomePageState extends State<MyHomePage> {
               Tab(
                 text: ('Shirt'),
               ),
-              Tab(icon: Icon(Icons.directions_transit)),
-              Tab(icon: Icon(Icons.directions_bike)),
+              Tab(
+                text: ('Troeser'),
+              ),
+              Tab(
+                text: ('Shoe'),
+              ),
             ],
           ),
           title: Text('Shopping closet'),
@@ -64,36 +89,117 @@ class _MyHomePageState extends State<MyHomePage> {
         body: TabBarView(
           children: [
             ListView.builder(
-              padding: const EdgeInsets.all(4.0),
-              itemCount: Shirtdata.length,
+              padding: const EdgeInsets.all(10),
+              itemCount: shirtList.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(Shirtdata[index].name),
-                  subtitle: Text(Shirtdata[index].price),
+                  title: Text(shirtList[index].name),
+                  subtitle: Text("\$ ${shirtList[index].price}"),
                   leading: Container(
                     child: ProfilePicture(
-                      name: Shirtdata[index].name,
+                      name: shirtList[index].name[0],
                       radius: 31,
                       fontsize: 21,
                     ),
                   ),
+                  trailing: IconButton(
+                    icon: const Icon(
+                      Icons.add_shopping_cart_sharp,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {},
+                  ),
+                  onTap: () {
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //     builder: (context) => Detail(
+                    //           _shirtData: shirtList[index],
+                    //         )));
+                  },
                 );
               },
             ),
-            const Icon(Icons.directions_transit),
-            const Icon(Icons.directions_bike),
+            ListView.builder(
+              padding: const EdgeInsets.all(10),
+              itemCount: trouserList.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(trouserList[index].name),
+                  subtitle: Text("\$ ${trouserList[index].price}"),
+                  leading: Container(
+                    child: ProfilePicture(
+                      name: trouserList[index].name[0],
+                      radius: 31,
+                      fontsize: 21,
+                    ),
+                  ),
+                  trailing: IconButton(
+                    icon: const Icon(
+                      Icons.add_shopping_cart_sharp,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {},
+                  ),
+                  onTap: () {
+                    //   // Navigator.of(context).push(MaterialPageRoute(
+                    //   //     builder: (context) => FruitDetail(
+                    //   //           fruitDataModel: Fruitdata[index],
+                    //   //         )));
+                  },
+                );
+              },
+            ),
+            ListView.builder(
+              padding: const EdgeInsets.all(10),
+              itemCount: shoeList.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(shoeList[index].name),
+                  subtitle: Text("\$ ${shoeList[index].price}"),
+                  leading: Container(
+                    child: ProfilePicture(
+                      name: shoeList[index].name[0],
+                      radius: 31,
+                      fontsize: 21,
+                    ),
+                  ),
+                  trailing: IconButton(
+                    icon: const Icon(
+                      Icons.add_shopping_cart_sharp,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {},
+                  ),
+                  onTap: () {
+                    //   // Navigator.of(context).push(MaterialPageRoute(
+                    //   //     builder: (context) => FruitDetail(
+                    //   //           fruitDataModel: Fruitdata[index],
+                    //   //         )));
+                  },
+                );
+              },
+            ),
           ],
+        ),
+        bottomSheet: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FlatButton(
+                child: Text('Add'),
+                color: Colors.blue,
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) => receipt())));
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
-
-
-
-
-
 
 // import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
