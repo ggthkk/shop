@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:closet/Detail.dart';
 import 'package:closet/product.dart';
 import 'package:closet/receipt.dart';
@@ -36,11 +38,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   static List shirtList = [
-    new ShirtData('GOLDIE', 800.00),
-    new ShirtData('HANES', 600.00),
-    new ShirtData('MADEWELL', 250.00),
-    new ShirtData('XKARLA', 520.00),
-    new ShirtData('MILO', 530.00),
+    new ShirtData('1', 'GOLDIE', 800.00),
+    new ShirtData('2', 'HANES', 600.00),
+    new ShirtData('3', 'MADEWELL', 250.00),
+    new ShirtData('4', 'XKARLA', 520.00),
+    new ShirtData('5', 'MILO', 530.00),
   ];
   static List trouserList = [
     new TrouserData('Blackberrys', 954.00),
@@ -66,10 +68,9 @@ class _MyHomePageState extends State<MyHomePage> {
   // ];
   // static List shirtprice = [' 800฿', ' 600฿', ' 250฿', '530฿', '520฿'];
   int number = 0;
+  List count = [];
   void addnumber() {
-    setState(() {
-      number++;
-    });
+    number++;
   }
 
   @override
@@ -117,7 +118,15 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Colors.black,
                       ),
                       onPressed: () {
-                        setState(() {});
+                        setState(() {
+                          this.count = shirtList[index].id;
+
+                          if (this.count == '1') {
+                            addnumber();
+                          }
+                          print(this.number);
+                          print(shirtList[index].id);
+                        });
                       },
                     ),
                     onTap: () {
