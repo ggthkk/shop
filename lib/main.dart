@@ -64,6 +64,12 @@ class _MyHomePageState extends State<MyHomePage> {
   //   'MILO'
   // ];
   // static List shirtprice = [' 800฿', ' 600฿', ' 250฿', '530฿', '520฿'];
+  int number = 0;
+  void addnumber() {
+    setState(() {
+      number++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             ListView.builder(
               padding: const EdgeInsets.all(10),
+              itemExtent: 100.0,
               itemCount: shirtList.length,
               itemBuilder: (context, index) {
                 return ListTile(
@@ -107,14 +114,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       Icons.add_shopping_cart_sharp,
                       color: Colors.black,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {});
+                    },
                   ),
-                  onTap: () {
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (context) => Detail(
-                    //           _shirtData: shirtList[index],
-                    //         )));
-                  },
+                  // onTap: () {
+                  //   //   // Navigator.of(context).push(MaterialPageRoute(
+                  //   //   //     builder: (context) => Detail(
+                  //   //   //           _shirtData: shirtList[index],
+                  //   //   //         )));
+                  // },
                 );
               },
             ),
@@ -200,6 +209,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+
 
 // import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
