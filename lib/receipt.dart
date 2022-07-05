@@ -37,24 +37,13 @@ class _receiptState extends State<receipt> {
               ),
             ),
           ),
-          Expanded(
-              child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                width: 150,
-                color: Colors.orange,
-              ),
-              Container(
-                width: 131.2,
-                color: Colors.green,
-              ),
-              Container(
-                width: 111,
-                color: Colors.pink,
-              ),
-            ],
-          )),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: Table(
+              border: TableBorder.all(),
+              children: [],
+            ),
+          ),
           Container(
             height: 80,
             color: Colors.blue,

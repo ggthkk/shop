@@ -1,3 +1,4 @@
+import 'package:closet/Detail.dart';
 import 'package:closet/product.dart';
 import 'package:closet/receipt.dart';
 import 'package:flutter/material.dart';
@@ -99,91 +100,102 @@ class _MyHomePageState extends State<MyHomePage> {
               itemExtent: 100.0,
               itemCount: shirtList.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(shirtList[index].name),
-                  subtitle: Text("\$ ${shirtList[index].price}"),
-                  leading: Container(
-                    child: ProfilePicture(
-                      name: shirtList[index].name[0],
-                      radius: 31,
-                      fontsize: 21,
+                return Card(
+                  child: ListTile(
+                    title: Text(shirtList[index].name),
+                    subtitle: Text("\$ ${shirtList[index].price}"),
+                    leading: Container(
+                      child: ProfilePicture(
+                        name: shirtList[index].name[0],
+                        radius: 31,
+                        fontsize: 21,
+                      ),
                     ),
-                  ),
-                  trailing: IconButton(
-                    icon: const Icon(
-                      Icons.add_shopping_cart_sharp,
-                      color: Colors.black,
+                    trailing: IconButton(
+                      icon: const Icon(
+                        Icons.add_shopping_cart_sharp,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        setState(() {});
+                      },
                     ),
-                    onPressed: () {
-                      setState(() {});
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) =>
+                                  Detail(shirtData: shirtList[index]))));
                     },
                   ),
-                  // onTap: () {
-                  //   //   // Navigator.of(context).push(MaterialPageRoute(
-                  //   //   //     builder: (context) => Detail(
-                  //   //   //           _shirtData: shirtList[index],
-                  //   //   //         )));
-                  // },
                 );
               },
             ),
             ListView.builder(
               padding: const EdgeInsets.all(10),
+              itemExtent: 100.0,
               itemCount: trouserList.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(trouserList[index].name),
-                  subtitle: Text("\$ ${trouserList[index].price}"),
-                  leading: Container(
-                    child: ProfilePicture(
-                      name: trouserList[index].name[0],
-                      radius: 31,
-                      fontsize: 21,
+                return Card(
+                  child: ListTile(
+                    title: Text(trouserList[index].name),
+                    subtitle: Text("\$ ${trouserList[index].price}"),
+                    leading: Container(
+                      child: ProfilePicture(
+                        name: trouserList[index].name[0],
+                        radius: 31,
+                        fontsize: 21,
+                      ),
                     ),
-                  ),
-                  trailing: IconButton(
-                    icon: const Icon(
-                      Icons.add_shopping_cart_sharp,
-                      color: Colors.black,
+                    trailing: IconButton(
+                      icon: const Icon(
+                        Icons.add_shopping_cart_sharp,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {},
                     ),
-                    onPressed: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) =>
+                                  Deail1(trouserData: trouserList[index]))));
+                    },
                   ),
-                  onTap: () {
-                    //   // Navigator.of(context).push(MaterialPageRoute(
-                    //   //     builder: (context) => FruitDetail(
-                    //   //           fruitDataModel: Fruitdata[index],
-                    //   //         )));
-                  },
                 );
               },
             ),
             ListView.builder(
               padding: const EdgeInsets.all(10),
+              itemExtent: 100.0,
               itemCount: shoeList.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(shoeList[index].name),
-                  subtitle: Text("\$ ${shoeList[index].price}"),
-                  leading: Container(
-                    child: ProfilePicture(
-                      name: shoeList[index].name[0],
-                      radius: 31,
-                      fontsize: 21,
+                return Card(
+                  child: ListTile(
+                    title: Text(shoeList[index].name),
+                    subtitle: Text("\$ ${shoeList[index].price}"),
+                    leading: Container(
+                      child: ProfilePicture(
+                        name: shoeList[index].name[0],
+                        radius: 31,
+                        fontsize: 21,
+                      ),
                     ),
-                  ),
-                  trailing: IconButton(
-                    icon: const Icon(
-                      Icons.add_shopping_cart_sharp,
-                      color: Colors.black,
+                    trailing: IconButton(
+                      icon: const Icon(
+                        Icons.add_shopping_cart_sharp,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {},
                     ),
-                    onPressed: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) =>
+                                  Deail2(shoeData: shoeList[index]))));
+                    },
                   ),
-                  onTap: () {
-                    //   // Navigator.of(context).push(MaterialPageRoute(
-                    //   //     builder: (context) => FruitDetail(
-                    //   //           fruitDataModel: Fruitdata[index],
-                    //   //         )));
-                  },
                 );
               },
             ),
