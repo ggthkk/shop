@@ -1,11 +1,12 @@
+import 'package:closet/product.dart';
 import 'package:flutter/material.dart';
 
 class receipt extends StatefulWidget {
-  const receipt({Key? key}) : super(key: key);
-
   @override
   State<receipt> createState() => _receiptState();
 }
+
+final _controller = TextEditingController();
 
 class _receiptState extends State<receipt> {
   @override
@@ -40,7 +41,10 @@ class _receiptState extends State<receipt> {
           margin: EdgeInsets.all(10),
           child: Table(
             border: TableBorder.all(),
-            columnWidths: {0: FractionColumnWidth(.4)},
+            columnWidths: {
+              0: FractionColumnWidth(.4),
+              1: FractionColumnWidth(.4)
+            },
             children: [
               TableRow(children: [
                 Column(
@@ -50,15 +54,6 @@ class _receiptState extends State<receipt> {
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    Container(
-                      alignment: Alignment.center,
-                      height: 450,
-                      child: Text(
-                        "List",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    )
                   ],
                 ),
                 Column(
@@ -77,17 +72,50 @@ class _receiptState extends State<receipt> {
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    Container(
-                      alignment: Alignment.center,
-                      height: 450,
-                      child: Text(
-                        "List",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    )
                   ],
                 )
+              ]),
+              TableRow(children: [
+                Column(children: [
+                  Container(
+                    height: 400,
+                  ),
+                  // Padding(padding: EdgeInsets.all(8),
+                  // child:
+                  // ),
+                ]),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        TextButton(
+                          child: Icon(Icons.remove, color: Colors.black),
+                          //backgroundColor: Colors.white,
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          width: 20,
+                          height: 20,
+                          color: Colors.black,
+                          child: TextField(
+                            controller: _controller,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        TextButton(onPressed: () {}, child: Icon(Icons.add)),
+                      ],
+                    )
+                  ],
+                ),
+                Text(''),
               ]),
               TableRow(children: [
                 Padding(
@@ -103,7 +131,24 @@ class _receiptState extends State<receipt> {
             ],
           ),
         ),
+        FlatButton(
+          child: Text('Check'),
+          color: Colors.blue,
+          onPressed: () {},
+        )
       ]),
+    );
+  }
+}
+
+class receiptitem extends StatelessWidget {
+  final ShirtData item;
+  receiptitem({Key? key, required this.item}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [Text(item.name)],
     );
   }
 }

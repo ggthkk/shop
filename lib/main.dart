@@ -6,7 +6,8 @@ import 'package:closet/receipt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 import 'product.dart';
-//import 'Detail.dart';
+import 'Detail.dart';
+import 'receipt.dart';
 
 void main() {
   runApp(const MyApp());
@@ -59,14 +60,6 @@ class _MyHomePageState extends State<MyHomePage> {
     new ShoeData('Puma', 900.00),
   ];
 
-  // static List<String> shirtname = [
-  //   'GOLDIE',
-  //   'HANES',
-  //   'MADEWELL',
-  //   'XKARLA',
-  //   'MILO'
-  // ];
-  // static List shirtprice = [' 800฿', ' 600฿', ' 250฿', '530฿', '520฿'];
   int number = 0;
   List count = [];
   void addnumber() {
@@ -118,15 +111,15 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Colors.black,
                       ),
                       onPressed: () {
-                        setState(() {
-                          this.count = shirtList[index].id;
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => receipt()));
+                        // this.count = shirtList[index].id;
 
-                          if (this.count == '1') {
-                            addnumber();
-                          }
-                          print(this.number);
-                          print(shirtList[index].id);
-                        });
+                        // // if (this.count == '1') {
+                        // //   addnumber();
+                        // // }
+                        // print(this.number);
+                        // print(shirtList[index].id);
                       },
                     ),
                     onTap: () {
@@ -230,112 +223,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
-
-// import 'package:flutter/material.dart';
-// import 'package:flutter/rendering.dart';
-// import 'shirt.dart';
-// import 'product.dart';
-// import 'package:flutter_profile_picture/flutter_profile_picture.dart';
-
-// void main() {
-//   runApp(MyApp());
-// }
-
-// const _backgroundColor = Color(0xFFF6F9FA);
-// const _blueColor = Color(0xFFD1863);
-// const _greenColor = Color(0xFF2BBEBA);
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       //title: "My App",
-//       home: Shop_title(),
-//       debugShowCheckedModeBanner: false,
-//       //theme: ThemeData(primarySwatch: Colors.orange),
-//     );
-//   }
-// }
-
-// class Shop_title extends StatefulWidget {
-//   @override
-//   Shop_titleState createState() => Shop_titleState();
-// }
-
-// class Shop_titleState extends State<Shop_title>
-//     with SingleTickerProviderStateMixin {
-//   late TabController _tabController;
-
-//   @override
-//   void initState() {
-//     _tabController = TabController(vsync: this, length: 3);
-//     super.initState();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: _backgroundColor,
-//       body: Column(
-//         crossAxisAlignment: CrossAxisAlignment.stretch,
-//         children: [
-//           Container(
-//             color: Colors.white,
-//             height: 100,
-//             child: Row(
-//               children: [
-//                 Text('Shopping Closet'),
-//               ],
-//             ),
-//           ),
-//           Container(
-//             color: Colors.green,
-//             height: 80,
-//             child: TabBar(
-//                 controller: _tabController,
-//                 isScrollable: true,
-//                 tabs: List.generate(
-//                   10,
-//                   (index) => Shop_tabwidget(),
-//                 )),
-//           ),
-//           Expanded(
-//               child: Container(
-//             color: Colors.blue,
-//           ))
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// class Shop_tabwidget extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Card(
-//       elevation: 6,
-//       child: Padding(
-//         padding: const EdgeInsets.all(8.0),
-//         child: Text(
-//           'Shirt',
-//           style: TextStyle(
-//               color: _blueColor, fontWeight: FontWeight.bold, fontSize: 13),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// // class homepage extends StatefulWidget {
-// //   @override
-// //   State<homepage> createState() => _homepageState();
-// // }
-
-// // class _homepageState extends State<homepage> {
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     return
-// //   }
-// // }
