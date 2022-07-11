@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:closet/Detail.dart';
 import 'package:closet/product.dart';
 import 'package:closet/receipt.dart';
@@ -111,14 +109,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Colors.black,
                       ),
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => receipt()));
-                        // this.count = shirtList[index].id;
+                        //Navigator.push(context,
+                        //    MaterialPageRoute(builder: (context) => receipt()));
+                        this.count = shirtList[index].id;
 
                         // // if (this.count == '1') {
                         // //   addnumber();
                         // // }
-                        // print(this.number);
+                        print(this.count);
                         // print(shirtList[index].id);
                       },
                     ),
@@ -188,7 +186,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         Icons.add_shopping_cart_sharp,
                         color: Colors.black,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) =>
+                                    Cart(nameProduct_cart: shoeList[index]))));
+                      },
                     ),
                     onTap: () {
                       Navigator.push(
@@ -213,7 +217,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: Colors.blue,
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) => receipt())));
+                      MaterialPageRoute(builder: ((context) => Cart())));
                 },
               ),
             ],
