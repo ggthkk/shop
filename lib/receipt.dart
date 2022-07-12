@@ -1,14 +1,34 @@
 import 'package:closet/product.dart';
 import 'package:flutter/material.dart';
+import 'product.dart';
 
-class receipt extends StatefulWidget {
+//class receiptitem extends StatelessWidget {
+//  final ShirtData item;
+//  receiptitem({Key? key, required this.item}) : super(key: key);
+
+//  @override
+//  Widget build(BuildContext context) {
+//    return Column(
+//      children: ProfilePicture(
+//        name: item.name,
+//        radius: 31,
+//        fontsize: 21,
+//      ),
+//    );
+//  }
+//}
+
+class receip extends StatefulWidget {
+  // const Cart({Key? key, required this.nameProduct_cart}) : super(key: key);
+  // final ShirtData nameProduct_cart;
+
   @override
-  State<receipt> createState() => _receiptState();
+  State<receip> createState() => _receipState();
 }
 
-final _controller = TextEditingController();
+class _receipState extends State<receip> {
+  //List count = [];
 
-class _receiptState extends State<receipt> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,6 +99,22 @@ class _receiptState extends State<receipt> {
                 Column(children: [
                   Container(
                     height: 400,
+
+                    // child: ListView.builder(
+                    //     shrinkWrap: true,
+                    //     itemCount: count.length,
+                    //     itemBuilder: ((context, index) {
+                    //       return Column(
+                    //         children: [
+                    //           Row(
+                    //             children: [
+                    //               Text(([index + 1]).toString()),
+                    //               Text(count[index].toString()),
+                    //             ],
+                    //           )
+                    //         ],
+                    //       );
+                    //     })),
                   ),
                   // Padding(padding: EdgeInsets.all(8),
                   // child:
@@ -100,10 +136,9 @@ class _receiptState extends State<receipt> {
                       children: [
                         Container(
                           width: 20,
-                          height: 20,
-                          color: Colors.black,
+                          height: 25,
                           child: TextField(
-                            controller: _controller,
+                            controller: TextEditingController(text: "0"),
                           ),
                         ),
                       ],
@@ -115,7 +150,7 @@ class _receiptState extends State<receipt> {
                     )
                   ],
                 ),
-                Text(''),
+                Text(""),
               ]),
               TableRow(children: [
                 Padding(
@@ -147,8 +182,10 @@ class receiptitem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [Text(item.name)],
-    );
+    return ListView.builder(
+        padding: const EdgeInsets.all(10),
+        itemExtent: 100.0,
+        itemCount: item.name.length,
+        itemBuilder: (context, index) => ListTile(title: Text(item.name)));
   }
 }

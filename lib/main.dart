@@ -9,6 +9,12 @@ import 'product.dart';
 import 'Detail.dart';
 import 'receipt.dart';
 
+import 'package:sqflite/sqflite.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart';
+import 'dart:io' as io;
+//import 'package:shopping_cart_app/model/cart_model.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -62,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   int number = 0;
   List count = [];
+  bool isbutton = false;
   void addnumber() {
     number++;
   }
@@ -91,45 +98,73 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             ListView.builder(
               padding: const EdgeInsets.all(10),
+              shrinkWrap: true,
               itemExtent: 100.0,
               itemCount: shirtList.length,
               itemBuilder: (context, index) {
                 return Card(
-                  child: ListTile(
-                    title: Text(shirtList[index].name),
-                    subtitle: Text("\$ ${shirtList[index].price}"),
-                    leading: Container(
-                      child: ProfilePicture(
+                  child: Row(
+                    children: [
+                      ProfilePicture(
                         name: shirtList[index].name[0],
                         radius: 31,
                         fontsize: 21,
                       ),
-                    ),
-                    trailing: IconButton(
-                      icon: const Icon(
-                        Icons.add_shopping_cart_sharp,
-                        color: Colors.black,
+                      RichText(
+                        text: TextSpan(text: 'name:', children: [
+                          TextSpan(
+                              text: '${shirtList[index].name.toString()}\n'),
+                        ]),
                       ),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => receipt()));
-                        // this.count = shirtList[index].id;
-
-                        // // if (this.count == '1') {
-                        // //   addnumber();
-                        // // }
-                        // print(this.number);
-                        // print(shirtList[index].id);
-                      },
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: ((context) =>
-                                  Detail(shirtData: shirtList[index]))));
-                    },
+                      RichText(
+                        text: TextSpan(text: 'price', children: [
+                          TextSpan(
+                              text: '${shirtList[index].price.toString()}\n')
+                        ]),
+                      ),
+                      IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.add_shopping_cart_sharp))
+                    ],
                   ),
+
+                  // ListTile(
+                  //   title: Text(shirtList[index].name),
+                  //   subtitle: Text("\$ ${shirtList[index].price}"),
+                  //   leading: Container(
+                  //     child: ProfilePicture(
+                  //       name: shirtList[index].name[0],
+                  //       radius: 31,
+                  //       fontsize: 21,
+                  //     ),
+                  //   ),
+                  // IconButton(
+                  //   icon: const Icon(
+                  //     Icons.add_shopping_cart_sharp,
+                  //     color: Colors.black,
+                  //   ),
+                  //   onPressed: () {
+                  //     setState(() {
+                  //       //isbutton = true;
+                  //       //count.add([index]);
+                  //     });
+                  //     //print(number++);
+                  //     print(shirtList[index].name);
+                  //     print(shirtList[index].id);
+                  //     Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) =>
+                  //                 receiptitem(item: shirtList[index])));
+                  //   },
+                  // ),
+                  // onTap: () {
+                  //   Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: ((context) =>
+                  //               Detail(shirtData: shirtList[index]))));
+                  // },
                 );
               },
             ),
@@ -213,7 +248,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: Colors.blue,
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) => receipt())));
+                      MaterialPageRoute(builder: ((context) => receip())));
                 },
               ),
             ],
