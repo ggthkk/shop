@@ -10,7 +10,7 @@ import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 //import 'Detail.dart';
 //import 'receipt.dart';
 //import 'models.dart/counter_model.dart';
-import 'package:scoped_model/scoped_model.dart';
+//import 'package:scoped_model/scoped_model.dart';
 import 'cartmodel.dart';
 
 void main() => runApp(MyApp(
@@ -21,6 +21,13 @@ class MyApp extends StatelessWidget {
   final CartModel model;
 
   const MyApp({Key? key, required this.model}) : super(key: key);
+
+// void main() {
+//   runApp(const MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -107,7 +107,7 @@ class _CartPageState extends State<CartPage> {
                       trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                         Padding(
                           padding: EdgeInsets.fromLTRB(0, 0, 50, 0),
-                          child: Text('You have ${count} Items'),
+                          //child: Text('You have ${count} Items'),
                         ),
                         IconButton(
                           icon: Icon(Icons.remove),
