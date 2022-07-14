@@ -21,10 +21,10 @@
 //     notifyListeners(); // แจ้งเตือนการเปลี่ยนแปลงข้อมูล
 //   }
 // }
-//import 'package:scoped_model/scoped_model.dart';
+import 'package:scoped_model/scoped_model.dart';
 //import 'package:quantity/quantity.dart';
 
-class CartModel {
+class CartModel extends Model {
   List<ShirtData> cart = [];
   double totalCartValue = 0;
   int get total => cart.length;

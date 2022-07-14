@@ -62,6 +62,7 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   List mycart = [];
   List pricecart = [];
+  List id = [];
   List<ShirtData> shirtList = [
     new ShirtData('1', 'GOLDIE', 800.00),
     new ShirtData('2', 'HANES', 600.00),
@@ -129,8 +130,10 @@ class _HomepageState extends State<Homepage> {
                         onPressed: () {
                           mycart.add(shirtList[index].name);
                           pricecart.add(shirtList[index].price);
+                          id.add(shirtList[index].id);
                           print(mycart);
                           print(pricecart);
+                          print(id);
                           // Navigator.push(
                           //     context,
                           //     MaterialPageRoute(
@@ -226,7 +229,11 @@ class _HomepageState extends State<Homepage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: ((context) => CartPage(cart: mycart))));
+                              builder: ((context) => CartPage(
+                                    cart: mycart,
+                                    p_cart: pricecart,
+                                    id_shirt: id,
+                                  ))));
                     },
                   )
                 ]))));

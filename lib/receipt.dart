@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 //import 'package:scoped_model/scoped_model.dart';
 //import 'package:shopping/cartmodel.dart';
 import 'cartmodel.dart';
+import 'product.dart';
 
 class CartPage extends StatefulWidget {
   List cart = [];
   List p_cart = [];
-  CartPage({required this.cart});
+  List id_shirt = [];
+  List count = ["a", "b", "c", "d"];
+
+  CartPage({required this.cart, required this.p_cart, required this.id_shirt});
+
   @override
   State<StatefulWidget> createState() {
     return _CartPageState();
@@ -17,7 +22,7 @@ class _CartPageState extends State<CartPage> {
   @override
   void initState() {
     distinct();
-    distinct1();
+    //distinct1();
     super.initState();
   }
 
@@ -26,14 +31,27 @@ class _CartPageState extends State<CartPage> {
     widget.cart = distinctlist;
   }
 
-  void distinct1() {
-    var distinctlist = widget.p_cart.toSet().toList();
-    widget.p_cart = distinctlist;
-  }
+  //void distinct1() {
+  //  var distinctlist = widget.p_cart.toSet().toList();
+  //  widget.p_cart = distinctlist;
+  //}
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    if (widget.id_shirt == "1") {
+      //count[a] = 1;
+      //var count1 = widget.id_shirt.where((item) => item == "1").length;
+    } else if (widget.id_shirt == "2") {
+      var count2 = widget.id_shirt.where((item) => item == "2").length;
+    } else if (widget.id_shirt == "3") {
+      var count3 = widget.id_shirt.where((item) => item == "3").length;
+    } else if (widget.id_shirt == "4") {
+      var count4 = widget.id_shirt.where((item) => item == "4").length;
+    } else if (widget.id_shirt == "5") {
+      var count5 = widget.id_shirt.where((item) => item == "5").length;
+    }
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.indigo,
@@ -78,28 +96,32 @@ class _CartPageState extends State<CartPage> {
                   itemCount: widget.cart.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      title: Text(widget.cart[index]),
-                      //subtitle: Text(widget.p_cart[index].toString()),
-                      // subtitle: Text(widget.cart[index].qty.toString() +
-                      //     " x " +
-                      //     widget.cart[index].price.toString() +
-                      //     " = " +
-                      //     (widget.cart[index].qty * widget.cart[index].price)
-                      //         .toString()),
+                      title: Text(widget.cart[index].toString()),
+                      subtitle: Text(widget.p_cart[index].toString()),
+                      //" x " +
+                      //widget.p_cart[index].toString() +
+                      //" = " +
+                      //(widget.cart[index].qty *
+                      //        widget.p_cart[index].toString())
+                      //    .toString()),
                       trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-                        IconButton(
-                          icon: Icon(Icons.add),
-                          onPressed: () {
-                            // model.updateProduct(model.cart[index],
-                            //     model.cart[index].qty + 1);
-                            // model.removeProduct(model.cart[index]);
-                          },
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 0, 50, 0),
+                          child: Text('You have ${count} Items'),
                         ),
                         IconButton(
                           icon: Icon(Icons.remove),
                           onPressed: () {
                             // model.updateProduct(model.cart[index],
                             //     model.cart[index].qty - 1);
+                            // model.removeProduct(model.cart[index]);
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.add),
+                          onPressed: () {
+                            // model.updateProduct(model.cart[index],
+                            //     model.cart[index].qty + 1);
                             // model.removeProduct(model.cart[index]);
                           },
                         ),
