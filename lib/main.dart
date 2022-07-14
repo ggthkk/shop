@@ -1,260 +1,192 @@
-import 'dart:ffi';
+//import 'dart:ffi';
 
 import 'package:closet/Detail.dart';
 import 'package:closet/product.dart';
 import 'package:closet/receipt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
-import 'product.dart';
-import 'Detail.dart';
-import 'receipt.dart';
+//import 'package:provider/provider.dart';
+//import 'product.dart';
+//import 'Detail.dart';
+//import 'receipt.dart';
+//import 'models.dart/counter_model.dart';
+//import 'package:scoped_model/scoped_model.dart';
+import 'cartmodel.dart';
 
-import 'package:sqflite/sqflite.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart';
-import 'dart:io' as io;
-//import 'package:shopping_cart_app/model/cart_model.dart';
-
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(MyApp(
+      model: CartModel(),
+    ));
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final CartModel model;
+
+  const MyApp({Key? key, required this.model}) : super(key: key);
+
+// void main() {
+//   runApp(const MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'List Demo',
+      title: 'Shopping',
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Homepage(),
       debugShowCheckedModeBanner: false,
+      //routes: {'/cart': (context) => CartPage()},
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+// class MyHomePage extends StatefulWidget {
+//   @override
+//   State<MyHomePage> createState() => _MyHomePageState();
+// }
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+// class _MyHomePageState extends State<MyHomePage> {
+  
+//   @override
+//   Widget build(BuildContext context) {
+//     return 
+    
+    
+    
+    //DefaultTabController(
+        // length: 3,
+        // child: Scaffold(
+        //   appBar: AppBar(
+        //     bottom: const TabBar(
+        //       tabs: [
+        //         Tab(
+        //           text: ('Shirt'),
+        //         ),
+        //         Tab(
+        //           text: ('Troeser'),
+        //         ),
+        //         Tab(
+        //           text: ('Shoe'),
+        //         ),
+        //       ],
+        //     ),
+        //     title: Text('Shopping closet'),
+        //   ),
+        //   body: TabBarView(
+        //     children: [
+        //       ListView.builder(
+        //         padding: const EdgeInsets.all(10),
+        //         shrinkWrap: true,
+        //         itemExtent: 100.0,
+        //         itemCount: shirtList.length,
+        //         itemBuilder: (context, index) {
+        //           return Card(
+        //               child: ListTile(
+        //             title: Text(shirtList[index].name),
+        //             subtitle: Text("\$ ${shirtList[index].price}"),
+        //             leading: Container(
+        //               child: ProfilePicture(
+        //                 name: shirtList[index].name[0],
+        //                 radius: 31,
+        //                 fontsize: 21,
+        //               ),
+        //             ),
+        //             trailing: IconButton(
+        //               onPressed: () {
+        //                 Navigator.push(
+        //                     context,
+        //                     MaterialPageRoute(
+        //                         builder: ((context) =>
+        //                             Cart(nameProduct_cart: shirtList[index]))));
+        //               },
+        //               icon: const Icon(Icons.add_shopping_cart_sharp),
+        //             ),
+        //             onTap: () {
+        //               Navigator.push(
+        //                   context,
+        //                   MaterialPageRoute(
+        //                       builder: ((context) =>
+        //                           Detail(shirtData: shirtList[index]))));
+        //             },
+        //           ));
+        //         },
+        //       ),
+        //       ListView.builder(
+        //         padding: const EdgeInsets.all(10),
+        //         itemExtent: 100.0,
+        //         itemCount: trouserList.length,
+        //         itemBuilder: (context, index) {
+        //           return Card(
+        //             child: ListTile(
+        //               title: Text(trouserList[index].name),
+        //               subtitle: Text("\$ ${trouserList[index].price}"),
+        //               leading: Container(
+        //                 child: ProfilePicture(
+        //                   name: trouserList[index].name[0],
+        //                   radius: 31,
+        //                   fontsize: 21,
+        //                 ),
+        //               ),
+        //               trailing: IconButton(
+        //                   onPressed: () {},
+        //                   icon: const Icon(Icons.add_shopping_cart_sharp)),
+        //               onTap: () {
+        //                 Navigator.push(
+        //                     context,
+        //                     MaterialPageRoute(
+        //                         builder: ((context) =>
+        //                             Deail1(trouserData: trouserList[index]))));
+        //               },
+        //             ),
+        //           );
+        //         },
+        //       ),
+        //       ListView.builder(
+        //         padding: const EdgeInsets.all(10),
+        //         itemExtent: 100.0,
+        //         itemCount: shoeList.length,
+        //         itemBuilder: (context, index) {
+        //           return Card(
+        //             child: ListTile(
+        //               title: Text(shoeList[index].name),
+        //               subtitle: Text("\$ ${shoeList[index].price}"),
+        //               leading: Container(
+        //                 child: ProfilePicture(
+        //                   name: shoeList[index].name[0],
+        //                   radius: 31,
+        //                   fontsize: 21,
+        //                 ),
+        //               ),
+        //               trailing: IconButton(
+        //                   onPressed: () {},
+        //                   icon: const Icon(Icons.add_shopping_cart_sharp)),
+        //               onTap: () {
+        //                 Navigator.push(
+        //                     context,
+        //                     MaterialPageRoute(
+        //                         builder: ((context) =>
+        //                             Deail2(shoeData: shoeList[index]))));
+        //               },
+        //             ),
+        //           );
+        //         },
+        //       ),
+        //     ],
+        //   ),
+       
+//   }
+// }
 
-class _MyHomePageState extends State<MyHomePage> {
-  static List shirtList = [
-    new ShirtData('1', 'GOLDIE', 800.00),
-    new ShirtData('2', 'HANES', 600.00),
-    new ShirtData('3', 'MADEWELL', 250.00),
-    new ShirtData('4', 'XKARLA', 520.00),
-    new ShirtData('5', 'MILO', 530.00),
-  ];
-  static List trouserList = [
-    new TrouserData('Blackberrys', 954.00),
-    new TrouserData('Parx', 899.00),
-    new TrouserData('Levi_s', 1552.00),
-    new TrouserData('Arrow', 2498.00),
-    new TrouserData('Reebok', 849.00),
-  ];
-  static List shoeList = [
-    new ShoeData('Nike', 1500.00),
-    new ShoeData('Adidas', 2000.00),
-    new ShoeData('Fila', 2200.00),
-    new ShoeData('Bata', 750.00),
-    new ShoeData('Puma', 900.00),
-  ];
+// class Count extends StatelessWidget {
+//   const Count({Key? key}) : super(key: key);
 
-  int number = 0;
-  List count = [];
-  bool isbutton = false;
-  void addnumber() {
-    number++;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          bottom: const TabBar(
-            tabs: [
-              Tab(
-                text: ('Shirt'),
-              ),
-              Tab(
-                text: ('Troeser'),
-              ),
-              Tab(
-                text: ('Shoe'),
-              ),
-            ],
-          ),
-          title: Text('Shopping closet'),
-        ),
-        body: TabBarView(
-          children: [
-            ListView.builder(
-              padding: const EdgeInsets.all(10),
-              shrinkWrap: true,
-              itemExtent: 100.0,
-              itemCount: shirtList.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: Row(
-                    children: [
-                      ProfilePicture(
-                        name: shirtList[index].name[0],
-                        radius: 31,
-                        fontsize: 21,
-                      ),
-                      RichText(
-                        text: TextSpan(text: 'name:', children: [
-                          TextSpan(
-                              text: '${shirtList[index].name.toString()}\n'),
-                        ]),
-                      ),
-                      RichText(
-                        text: TextSpan(text: 'price', children: [
-                          TextSpan(
-                              text: '${shirtList[index].price.toString()}\n')
-                        ]),
-                      ),
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.add_shopping_cart_sharp))
-                    ],
-                  ),
-
-                  // ListTile(
-                  //   title: Text(shirtList[index].name),
-                  //   subtitle: Text("\$ ${shirtList[index].price}"),
-                  //   leading: Container(
-                  //     child: ProfilePicture(
-                  //       name: shirtList[index].name[0],
-                  //       radius: 31,
-                  //       fontsize: 21,
-                  //     ),
-                  //   ),
-                  // IconButton(
-                  //   icon: const Icon(
-                  //     Icons.add_shopping_cart_sharp,
-                  //     color: Colors.black,
-                  //   ),
-                  //   onPressed: () {
-                  //     setState(() {
-                  //       //isbutton = true;
-                  //       //count.add([index]);
-                  //     });
-                  //     //print(number++);
-                  //     print(shirtList[index].name);
-                  //     print(shirtList[index].id);
-                  //     Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(
-                  //             builder: (context) =>
-                  //                 receiptitem(item: shirtList[index])));
-                  //   },
-                  // ),
-                  // onTap: () {
-                  //   Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //           builder: ((context) =>
-                  //               Detail(shirtData: shirtList[index]))));
-                  // },
-                );
-              },
-            ),
-            ListView.builder(
-              padding: const EdgeInsets.all(10),
-              itemExtent: 100.0,
-              itemCount: trouserList.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
-                    title: Text(trouserList[index].name),
-                    subtitle: Text("\$ ${trouserList[index].price}"),
-                    leading: Container(
-                      child: ProfilePicture(
-                        name: trouserList[index].name[0],
-                        radius: 31,
-                        fontsize: 21,
-                      ),
-                    ),
-                    trailing: IconButton(
-                      icon: const Icon(
-                        Icons.add_shopping_cart_sharp,
-                        color: Colors.black,
-                      ),
-                      onPressed: () {},
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: ((context) =>
-                                  Deail1(trouserData: trouserList[index]))));
-                    },
-                  ),
-                );
-              },
-            ),
-            ListView.builder(
-              padding: const EdgeInsets.all(10),
-              itemExtent: 100.0,
-              itemCount: shoeList.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
-                    title: Text(shoeList[index].name),
-                    subtitle: Text("\$ ${shoeList[index].price}"),
-                    leading: Container(
-                      child: ProfilePicture(
-                        name: shoeList[index].name[0],
-                        radius: 31,
-                        fontsize: 21,
-                      ),
-                    ),
-                    trailing: IconButton(
-                      icon: const Icon(
-                        Icons.add_shopping_cart_sharp,
-                        color: Colors.black,
-                      ),
-                      onPressed: () {},
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: ((context) =>
-                                  Deail2(shoeData: shoeList[index]))));
-                    },
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-        bottomSheet: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FlatButton(
-                child: Text('Add'),
-                color: Colors.blue,
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) => receip())));
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Text('${context.watch<Counter>().count}',
+//         key: const Key('counterState'),
+//         style: Theme.of(context).textTheme.headline4);
+//   }
+// }
